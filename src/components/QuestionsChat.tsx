@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef } from 'react';
 import { useScrollAnimation } from '@/hooks/useScrollAnimation';
 
 interface Message {
@@ -16,18 +16,18 @@ const QuestionsChat: React.FC<QuestionsChatProps> = ({ onChatSend }) => {
   const { ref: titleRef, isVisible: titleVisible } = useScrollAnimation({ 
     threshold: 0.1, 
     triggerOnce: true,
-    rootMargin: '0px 0px -100px 0px' // Only trigger when element is closer to viewport
+    rootMargin: '0px 0px -100px 0px'
   });
   const { ref: chatRef, isVisible: chatVisible } = useScrollAnimation({ 
     threshold: 0.1, 
     triggerOnce: true,
-    rootMargin: '0px 0px -100px 0px' // Only trigger when element is closer to viewport
+    rootMargin: '0px 0px -100px 0px'
   });
   
   const [messages, setMessages] = useState<Message[]>([]);
   const [inputValue, setInputValue] = useState('');
   const [isLoading, setIsLoading] = useState(false);
-  const messagesEndRef = useRef<HTMLDivElement>(null);
+  const chatContainerRef = useRef<HTMLDivElement>(null);
 
   const suggestionQuestions = [
     "Tell me about your experience at your current company",
@@ -36,17 +36,6 @@ const QuestionsChat: React.FC<QuestionsChatProps> = ({ onChatSend }) => {
     "What technologies do you specialize in?",
     "Tell me about your embedded systems projects"
   ];
-
-  const scrollToBottom = () => {
-    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
-  };
-
-  // Only scroll to bottom when new messages are added
-  useEffect(() => {
-    if (messages.length > 0) {
-      scrollToBottom();
-    }
-  }, [messages]);
 
   const handleSuggestionClick = (question: string) => {
     handleSendMessage(question);
@@ -154,7 +143,10 @@ const QuestionsChat: React.FC<QuestionsChatProps> = ({ onChatSend }) => {
 
           {/* Chat Window */}
           <div className="bg-dark-secondary rounded-lg p-4 mb-4">
-            <div className="h-96 overflow-y-auto p-4 space-y-4">
+            <div 
+              ref={chatContainerRef}
+              className="h-96 overflow-y-auto p-4 space-y-4"
+            >
               {messages.length === 0 ? (
                 <div className="text-center text-gray-400 mt-20">
                   <p>Ask me anything about my experience and projects!</p>
@@ -180,7 +172,6 @@ const QuestionsChat: React.FC<QuestionsChatProps> = ({ onChatSend }) => {
                   </div>
                 ))
               )}
-              <div ref={messagesEndRef} />
             </div>
           </div>
 
