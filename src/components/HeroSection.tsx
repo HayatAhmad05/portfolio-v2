@@ -1,4 +1,3 @@
-
 import React, { useEffect, useRef } from 'react';
 import { Button } from "@/components/ui/button";
 import { useTypewriter } from '@/hooks/useTypewriter';
@@ -8,15 +7,14 @@ const HeroSection = () => {
 
   const typewriterWords = [
     'Hayat',
-    'Computer Engineer',
-    'Developer',
-    'Problem Solver',
-    'Tech Enthusiast'
+    'a Computer Engineer',
+    'Hardware Enthusiast',
+    'a Developer',
   ];
 
   const currentWord = useTypewriter({
     words: typewriterWords,
-    typeSpeed: 100,
+    typeSpeed: 80,
     deleteSpeed: 50,
     delayBetweenWords: 2000
   });
@@ -48,12 +46,13 @@ const HeroSection = () => {
       <div className="container mx-auto px-6 text-center relative z-10">
         <div className="animate-fade-in">
           <div className="text-4xl md:text-6xl lg:text-7xl font-bold text-white mb-8 leading-tight">
-            <p className="text-gray-400 text-lg mb-4">Hello I'm a</p>
-            <span className="inline-block min-w-[300px] text-left">
-              {currentWord}
-              <span className="animate-pulse">|</span>
-            </span>
-            <br />
+            <div className="flex items-center justify-center text-gray-400 text-lg mb-4">
+              <span>Hello I'm&nbsp;</span>
+              <span className="inline-block min-w-[180px] text-left text-white">
+                {currentWord}
+                <span className="animate-pulse">|</span>
+              </span>
+            </div>
             <span className="text-white">Building intelligent systems with a love for </span>
             <span className="text-transparent bg-gradient-to-r from-cyan-accent to-purple-accent bg-clip-text">embedded tech</span>
             <span className="text-white">, clean code, and good design.</span>

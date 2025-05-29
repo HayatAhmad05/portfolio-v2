@@ -8,25 +8,25 @@ const ExperienceSection = () => {
 
   const experiences = [
     {
-      title: "Software Engineer",
-      company: "Tech Solutions Inc.",
-      period: "2022 - Present",
-      description: "Developing embedded systems and IoT solutions. Working with C/C++, Python, and various microcontroller platforms.",
-      technologies: ["C/C++", "Python", "ARM Cortex", "RTOS", "IoT"]
+      title: "AI/ML Engineer",
+      company: "NETSOL Technologies Ltd.",
+      period: "May 2025 - Present",
+      description: "Led the creation of an intelligent, agentic reimbursement system that automates receipt scanning, data extraction, and form submission, cutting manual processing time by over 65%. Developed an LLM-powered financial data pipeline to streamline ratio extraction and reporting, boosting analytics speed and accuracy. Built an AI Caller Assistant using speech recognition and LLMs to automate client interactions, reducing manual call handling by 50% and enabling real-time call analytics.",
+      technologies: ["Python", "LLM's", "Fast API", "OCR", "LangChain", "MongoDB", "Docker"]
     },
     {
-      title: "Junior Developer",
-      company: "Innovation Labs",
-      period: "2021 - 2022",
-      description: "Contributed to web applications and learned the fundamentals of software development in a collaborative environment.",
-      technologies: ["React", "JavaScript", "Node.js", "MongoDB"]
+      title: "Full-Stack Developer",
+      company: "National University of Science and Technology",
+      period: "May 2024 - Aug 2024",
+      description: "Designed and implemented dynamic React frontend features, including research filters and notification panels, improving student-professor connections by 20%. Integrated RESTful APIs with real-time polling to provide up-to-date research postings, enhancing navigation speed and accuracy. Increased user engagement by 30% through responsive profile pages optimized for cross-device compatibility.",
+      technologies: ["React", "JavaScript", "Node.js", "MongoDB", "RESTful APIs", "WebSockets"]
     },
     {
-      title: "Computer Engineering Student",
-      company: "University",
-      period: "2018 - 2022",
-      description: "Studied computer engineering with focus on embedded systems, digital design, and software engineering principles.",
-      technologies: ["Verilog", "Assembly", "MATLAB", "C", "Java"]
+      title: "Technical Team Intern",
+      company: "Tetra Pak Ltd.",
+      period: "May 2023 - Aug 2023",
+      description: "Diagnosed and resolved sensor, motor, and control system issues on 50+ packaging machines, achieving incident resolutions in under 30 minutes and reducing repair times. Implemented preventive maintenance and calibration programs that cut unscheduled downtime by 15%, improving production efficiency. Collaborated with cross-functional teams to implement efficiency upgrades, increasing overall throughput by 10%.",
+      technologies: ["Cross Functional Teams", "Preventive Maintenance", "Sensors", "PLC's"]
     }
   ];
 
