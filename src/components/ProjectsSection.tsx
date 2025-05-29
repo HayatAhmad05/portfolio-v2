@@ -1,144 +1,84 @@
 
-import React, { useEffect, useRef, useState } from 'react';
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
-import { Link, ArrowUp } from "lucide-react";
+import React from 'react';
+import { useScrollAnimation } from '@/hooks/useScrollAnimation';
 
 const ProjectsSection = () => {
-  const [isVisible, setIsVisible] = useState(false);
-  const sectionRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsVisible(true);
-        }
-      },
-      { threshold: 0.1 }
-    );
-
-    if (sectionRef.current) {
-      observer.observe(sectionRef.current);
-    }
-
-    return () => observer.disconnect();
-  }, []);
+  const { ref: titleRef, isVisible: titleVisible } = useScrollAnimation({ threshold: 0.1, triggerOnce: true });
+  const { ref: projectsRef, isVisible: projectsVisible } = useScrollAnimation({ threshold: 0.1, triggerOnce: true });
 
   const projects = [
     {
-      title: "Smart Home IoT System",
-      description: "A comprehensive home automation system built with ESP32 microcontrollers, featuring real-time sensor monitoring, mobile app control, and cloud integration for remote access.",
-      techStack: ["ESP32", "React Native", "Firebase", "C++", "Node.js"],
-      githubUrl: "#",
-      liveUrl: "#"
+      title: "Smart IoT Weather Station",
+      description: "An intelligent weather monitoring system using ESP32 that collects environmental data and sends it to a cloud dashboard. Features real-time monitoring and predictive analytics.",
+      technologies: ["ESP32", "C++", "React", "Firebase", "Sensors"],
+      image: "🌤️"
     },
     {
-      title: "PCB Signal Analyzer",
-      description: "Custom PCB design for signal analysis with high-speed ADC, designed in KiCad with accompanying firmware for real-time data visualization and processing.",
-      techStack: ["KiCad", "STM32", "Python", "Qt", "C"],
-      githubUrl: "#",
-      liveUrl: "#"
+      title: "Embedded Motion Control System", 
+      description: "A precision motor control system for robotics applications. Implements PID control algorithms and real-time feedback for accurate positioning.",
+      technologies: ["ARM Cortex-M", "C", "RTOS", "PWM", "Encoders"],
+      image: "🤖"
     },
     {
-      title: "Autonomous Robot Navigation",
-      description: "Mobile robot with computer vision capabilities for autonomous navigation using ROS, implementing SLAM algorithms and path planning for indoor environments.",
-      techStack: ["ROS", "Python", "OpenCV", "Arduino", "TensorFlow"],
-      githubUrl: "#",
-      liveUrl: "#"
-    },
-    {
-      title: "Web-based Code Editor",
-      description: "A collaborative code editor with real-time syntax highlighting, multi-language support, and live collaboration features built with modern web technologies.",
-      techStack: ["React", "TypeScript", "Socket.io", "Monaco Editor", "Express"],
-      githubUrl: "#",
-      liveUrl: "#"
-    },
-    {
-      title: "Weather Monitoring Station",
-      description: "Wireless weather station network using LoRa communication, collecting environmental data from multiple sensors and displaying analytics through a web dashboard.",
-      techStack: ["LoRa", "ESP32", "React", "PostgreSQL", "Docker"],
-      githubUrl: "#",
-      liveUrl: "#"
-    },
-    {
-      title: "LED Matrix Display",
-      description: "Custom LED matrix controller with Wi-Fi connectivity for displaying animations, text, and real-time data. Features web interface for easy content management.",
-      techStack: ["ESP8266", "FastLED", "Vue.js", "WebSockets", "C++"],
-      githubUrl: "#",
-      liveUrl: "#"
+      title: "Portfolio Website",
+      description: "A modern, responsive portfolio website built with React and TypeScript. Features smooth animations, dark theme, and optimized performance.",
+      technologies: ["React", "TypeScript", "Tailwind CSS", "Vite"],
+      image: "💻"
     }
   ];
 
   return (
-    <section 
-      id="projects" 
-      ref={sectionRef}
-      className="py-20 relative overflow-hidden"
-    >
-      <div className="absolute inset-0 checkerboard-bg opacity-5"></div>
-      
-      <div className="container mx-auto px-6 relative z-10">
-        <div className={`text-center mb-16 ${isVisible ? 'animate-fade-in' : 'opacity-0'}`}>
-          <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">Featured Projects</h2>
-          <p className="text-gray-400 text-lg max-w-2xl mx-auto">
-            A showcase of my recent work in embedded systems, web development, and hardware design
-          </p>
+    <section id="projects" className="py-20 bg-dark-secondary">
+      <div className="container mx-auto px-6">
+        <div 
+          ref={titleRef}
+          className={`text-center mb-16 transition-all duration-1000 ${
+            titleVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+          }`}
+        >
+          <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">Projects</h2>
+          <div className="w-24 h-1 bg-gradient-to-r from-cyan-accent to-purple-accent mx-auto"></div>
         </div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div 
+          ref={projectsRef}
+          className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto"
+        >
           {projects.map((project, index) => (
-            <Card 
+            <div 
               key={index}
-              className={`bg-dark-secondary border-dark-accent hover:border-cyan-accent/50 transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-cyan-accent/20 group ${
-                isVisible ? 'animate-fade-in' : 'opacity-0'
+              className={`group bg-dark-primary rounded-lg border border-gray-700 overflow-hidden hover:border-cyan-accent transition-all duration-500 hover:transform hover:scale-105 hover:shadow-2xl hover:shadow-cyan-accent/20 ${
+                projectsVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
               }`}
-              style={{ animationDelay: `${index * 0.1}s` }}
+              style={{ animationDelay: `${index * 200}ms` }}
             >
-              <CardHeader>
-                <CardTitle className="text-white group-hover:text-cyan-accent transition-colors duration-300">
+              <div className="p-6">
+                <div className="text-6xl mb-4 group-hover:scale-110 transition-transform duration-300">
+                  {project.image}
+                </div>
+                
+                <h3 className="text-xl font-bold text-white mb-3 group-hover:text-cyan-accent transition-colors duration-300">
                   {project.title}
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
+                </h3>
+                
                 <p className="text-gray-300 mb-6 leading-relaxed">
                   {project.description}
                 </p>
                 
-                <div className="flex flex-wrap gap-2 mb-6">
-                  {project.techStack.map((tech, techIndex) => (
-                    <Badge 
+                <div className="flex flex-wrap gap-2">
+                  {project.technologies.map((tech, techIndex) => (
+                    <span 
                       key={techIndex}
-                      variant="secondary"
-                      className="bg-dark-accent text-cyan-accent border border-cyan-accent/30 hover:bg-cyan-accent hover:text-black transition-colors duration-200"
+                      className="px-3 py-1 bg-dark-secondary border border-gray-600 rounded-full text-sm text-gray-300 group-hover:border-cyan-accent group-hover:text-cyan-accent transition-all duration-300"
                     >
                       {tech}
-                    </Badge>
+                    </span>
                   ))}
                 </div>
-
-                <div className="flex gap-3">
-                  <Button
-                    variant="outline"
-                    size="sm"
-                    className="border-cyan-accent text-cyan-accent hover:bg-cyan-accent hover:text-black transition-all duration-200"
-                    onClick={() => window.open(project.githubUrl, '_blank')}
-                  >
-                    <Link className="w-4 h-4 mr-2" />
-                    Code
-                  </Button>
-                  <Button
-                    size="sm"
-                    className="bg-purple-accent hover:bg-purple-600 text-white transition-all duration-200"
-                    onClick={() => window.open(project.liveUrl, '_blank')}
-                  >
-                    <ArrowUp className="w-4 h-4 mr-2" />
-                    Live
-                  </Button>
-                </div>
-              </CardContent>
-            </Card>
+              </div>
+              
+              <div className="h-1 bg-gradient-to-r from-cyan-accent to-purple-accent transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left"></div>
+            </div>
           ))}
         </div>
       </div>
