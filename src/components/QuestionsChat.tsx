@@ -1,5 +1,4 @@
-
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { useScrollAnimation } from '@/hooks/useScrollAnimation';
 
 interface Message {
@@ -19,6 +18,8 @@ const QuestionsChat: React.FC<QuestionsChatProps> = ({ onChatSend }) => {
   
   const [messages, setMessages] = useState<Message[]>([]);
   const [inputValue, setInputValue] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
+  const messagesEndRef = useRef<HTMLDivElement>(null);
 
   const suggestionQuestions = [
     "Tell me about your experience at your current company",
@@ -28,11 +29,19 @@ const QuestionsChat: React.FC<QuestionsChatProps> = ({ onChatSend }) => {
     "Tell me about your embedded systems projects"
   ];
 
+  const scrollToBottom = () => {
+    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+  };
+
+  useEffect(() => {
+    scrollToBottom();
+  }, [messages]);
+
   const handleSuggestionClick = (question: string) => {
     handleSendMessage(question);
   };
 
-  const handleSendMessage = (message: string) => {
+  const handleSendMessage = async (message: string) => {
     if (message.trim()) {
       const newMessage: Message = {
         id: Date.now(),
@@ -43,18 +52,48 @@ const QuestionsChat: React.FC<QuestionsChatProps> = ({ onChatSend }) => {
       
       setMessages(prev => [...prev, newMessage]);
       setInputValue('');
-      onChatSend(message);
-      
-      // Simulate a bot response (you can replace this with actual logic)
-      setTimeout(() => {
+      setIsLoading(true);
+
+      try {
+        console.log('Sending message to API:', message);
+        const response = await fetch('/api/chat', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ message }),
+        });
+
+        const data = await response.json();
+        console.log('API Response:', data);
+
+        if (!response.ok) {
+          throw new Error(data.error || data.details || 'Failed to get response from bot');
+        }
+
+        if (!data.reply) {
+          throw new Error('No reply received from the API');
+        }
+        
         const botResponse: Message = {
           id: Date.now() + 1,
-          text: "Thanks for your question! This is a placeholder response. In a real implementation, this would connect to your chat system.",
+          text: data.reply,
           isUser: false,
           timestamp: new Date()
         };
         setMessages(prev => [...prev, botResponse]);
-      }, 1000);
+
+      } catch (error) {
+        console.error("Error sending message to bot:", error);
+        const errorMessage = error instanceof Error ? error.message : 'Unknown error occurred';
+        const errorResponse: Message = {
+          id: Date.now() + 1,
+          text: `Sorry, something went wrong: ${errorMessage}`,
+          isUser: false,
+          timestamp: new Date()
+        };
+        setMessages(prev => [...prev, errorResponse]);
+      } finally {
+        setIsLoading(false);
+      }
     }
   };
 
@@ -69,7 +108,6 @@ const QuestionsChat: React.FC<QuestionsChatProps> = ({ onChatSend }) => {
 
   return (
     <section className="py-20 bg-dark-primary">
-      {/* Chat widget mount point */}
       <div className="container mx-auto px-6">
         <div 
           ref={titleRef}
@@ -104,7 +142,7 @@ const QuestionsChat: React.FC<QuestionsChatProps> = ({ onChatSend }) => {
           </header>
 
           {/* Chat Window */}
-          <div className="bg-gray-900 rounded-lg border border-gray-700 mb-4">
+          <div className="bg-dark-secondary rounded-lg p-4 mb-4">
             <div className="h-96 overflow-y-auto p-4 space-y-4">
               {messages.length === 0 ? (
                 <div className="text-center text-gray-400 mt-20">
@@ -131,10 +169,11 @@ const QuestionsChat: React.FC<QuestionsChatProps> = ({ onChatSend }) => {
                   </div>
                 ))
               )}
+              <div ref={messagesEndRef} />
             </div>
           </div>
 
-          {/* Input Bar */}
+          {/* Input Form */}
           <form onSubmit={handleInputSubmit} className="flex gap-2">
             <input
               type="text"
@@ -142,17 +181,20 @@ const QuestionsChat: React.FC<QuestionsChatProps> = ({ onChatSend }) => {
               onChange={(e) => setInputValue(e.target.value)}
               placeholder="Ask me anything…"
               className="flex-1 px-4 py-2 bg-gray-800 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:border-cyan-accent transition-colors duration-200"
+              disabled={isLoading}
             />
             <button
               type="submit"
-              className="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition-colors duration-200"
+              className="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
+              disabled={isLoading || !inputValue.trim()}
             >
-              Send
+              {isLoading ? 'Sending...' : 'Send'}
             </button>
             <button
               type="button"
               onClick={handleClear}
               className="bg-gray-600 text-white px-4 py-2 rounded-lg hover:bg-gray-700 transition-colors duration-200"
+              disabled={isLoading}
             >
               Clear
             </button>
