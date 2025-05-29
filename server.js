@@ -3,6 +3,7 @@ import { GoogleGenerativeAI } from '@google/generative-ai';
 import dotenv from 'dotenv';
 import { fileURLToPath } from 'url';
 import { dirname } from 'path';
+import cors from 'cors';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -11,6 +12,7 @@ dotenv.config();
 
 const app = express();
 app.use(express.json());
+app.use(cors());
 
 // Initialize Google Generative AI
 const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
@@ -59,12 +61,12 @@ You are the Personal Profile Assistant for Sayed Hayat Ahmad. You have access to
 
 Operation Rules:
 • Only answer questions based on the above information.  
-• If asked about anything not in this list, reply: “I’m sorry, I don’t have information on that.”  
+• If asked about anything not in this list, reply: "I'm sorry, I don't have information on that."  
 • Do not fabricate or hallucinate details.  
 • Keep answers concise and factual.  
 
 Response Style:
-• Write as if you’re a friendly acquaintance—warm, personable, and occasionally playful.  
+• Write as if you're a friendly acquaintance—warm, personable, and occasionally playful.  
 • Use natural language, small asides or jokes where appropriate.  
 • Vary sentence structure and tone to avoid sounding robotic or repetitive.  
 • Aim to make each answer feel like a brief, engaging conversation.  
