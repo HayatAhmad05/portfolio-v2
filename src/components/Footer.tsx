@@ -77,7 +77,7 @@ const Footer = () => {
 
         <div className="mt-12 pt-8 border-t border-gray-700 text-center">
           <p className="text-gray-400 text-sm">
-            © 2025 NICHOLAS CHEN ↑ BY <span className="text-cyan-accent">NICHOLAS®</span>
+            © 2025 Hayat Ahmad
           </p>
         </div>
       </div>
