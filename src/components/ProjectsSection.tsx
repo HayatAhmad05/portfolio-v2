@@ -8,23 +8,44 @@ const ProjectsSection = () => {
 
   const projects = [
     {
-      title: "Smart IoT Weather Station",
-      description: "An intelligent weather monitoring system using ESP32 that collects environmental data and sends it to a cloud dashboard. Features real-time monitoring and predictive analytics.",
-      technologies: ["ESP32", "C++", "React", "Firebase", "Sensors"],
+      title: "Spotify Desktop Asisstant",
+      description: "Developed an ESP32-based IoT device in C++ that visualizes real-time Spotify metadata on a TFT screen using RESTful APIs and SPI/I2C communication. Enabled direct music controls (play/pause) via rotary encoder inputs without opening the Spotify app. Designed a secure OAuth 2.0 authentication flow with automated token refresh and encrypted local storage for seamless API access.",
+      technologies: ["ESP32", "C++", "RESTful API", "OAuth 2.0", "SPI", "I2C"],
       image: "🌤️"
     },
     {
-      title: "Embedded Motion Control System", 
-      description: "A precision motor control system for robotics applications. Implements PID control algorithms and real-time feedback for accurate positioning.",
-      technologies: ["ARM Cortex-M", "C", "RTOS", "PWM", "Encoders"],
+      title: "ReClaim AI",
+      description: "Developed an agentic reimbursement automation system that streamlines receipt scanning, intelligent data extraction, and automated PDF form submission. This system significantly reduces manual processing time and enhances accuracy by leveraging AI-driven workflows, enabling faster and more reliable reimbursement handling.",
+      technologies: [ "Python", "LangChain", "FastAPI", "Docker", "OCR", "PDF Autofilling", "Cloud Deployment", "Automation"],
       image: "🤖"
     },
     {
-      title: "Portfolio Website",
-      description: "A modern, responsive portfolio website built with React and TypeScript. Features smooth animations, dark theme, and optimized performance.",
-      technologies: ["React", "TypeScript", "Tailwind CSS", "Vite"],
+      title: "DialMind — AI-Powered Intelligent Caller Assistant",
+      description: "Developed DialMind, an agentic AI caller assistant that automates dynamic, multi-turn client conversations using advanced speech recognition and large language models. DialMind handles real-time speech-to-text transcription, context-aware dialogue management, and generates responsive, human-like interactions. This innovation reduced manual call handling hours by 50% and enabled real-time analytics on call data, significantly improving operational efficiency.",
+      technologies: [ "Whisper","LangChain", "FastAPI", "Python", "LLM's", "Agentic Chatbot", "NLP"],
+      image: "🤖"
+    },
+    {
+      title: "Macropad PCB Design", 
+      description: "Designed a 3x3 matrix PCB using Altium Designer and KiCad with optimized trace routing and ground plane isolation to minimize EMI and maintain signal integrity. Validated the macropad design through SPICE simulations to ensure reliable circuit performance. Enhanced productivity by 40% by scripting customizable key macros in CircuitPython, enabling efficient task automation and rapid command execution.",
+      technologies: [ "Altium Designer", "KiCad", "SPICE Simulation", "CircuitPython", "PCB Design", "EMI Mitigation"],
+      image: "🤖"
+    },
+  
+    {
+      title: "The Heart That Fed",
+      description: "The Heart That Fed is a real-time civilization management game built in Godot 4 within 9 days for BIGMODE Jam 2025. Players allocate workers across industry, farming, and construction while managing dynamic events like famine and revolts. The game features procedural resource management, state-driven AI, and real-time event handling, leveraging Godot’s scene system and GDScript. Input is via mouse and keyboard (A + D keys).",
+      technologies: [ "Godot 4", "GDScript", "C", "Game Design", "Real-time Systems"],
       image: "💻"
-    }
+    },
+    {
+      title: "Portfolio Website",
+      description: "Built a modern, responsive portfolio website using React and Tailwind CSS, featuring a modular component-based architecture for easy updates. Integrated a custom chatbot enabling real-time, interactive user engagement, enhancing the site’s functionality and user experience. The chatbot leverages dynamic data rendering and smooth UI interactions within the React framework",
+      technologies: [ "React", "Tailwind CSS", "JavaScript","HTML", "CSS", "LangChain", "LLM's", "FastAPI", "Responsive Design", "Component Architecture"],
+      image: "💻"
+    },
+
+ 
   ];
 
   return (
