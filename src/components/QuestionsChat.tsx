@@ -13,8 +13,16 @@ interface QuestionsChatProps {
 }
 
 const QuestionsChat: React.FC<QuestionsChatProps> = ({ onChatSend }) => {
-  const { ref: titleRef, isVisible: titleVisible } = useScrollAnimation({ threshold: 0.1, triggerOnce: true });
-  const { ref: chatRef, isVisible: chatVisible } = useScrollAnimation({ threshold: 0.1, triggerOnce: true });
+  const { ref: titleRef, isVisible: titleVisible } = useScrollAnimation({ 
+    threshold: 0.1, 
+    triggerOnce: true,
+    rootMargin: '0px 0px -100px 0px' // Only trigger when element is closer to viewport
+  });
+  const { ref: chatRef, isVisible: chatVisible } = useScrollAnimation({ 
+    threshold: 0.1, 
+    triggerOnce: true,
+    rootMargin: '0px 0px -100px 0px' // Only trigger when element is closer to viewport
+  });
   
   const [messages, setMessages] = useState<Message[]>([]);
   const [inputValue, setInputValue] = useState('');
@@ -33,8 +41,11 @@ const QuestionsChat: React.FC<QuestionsChatProps> = ({ onChatSend }) => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   };
 
+  // Only scroll to bottom when new messages are added
   useEffect(() => {
-    scrollToBottom();
+    if (messages.length > 0) {
+      scrollToBottom();
+    }
   }, [messages]);
 
   const handleSuggestionClick = (question: string) => {
@@ -107,7 +118,7 @@ const QuestionsChat: React.FC<QuestionsChatProps> = ({ onChatSend }) => {
   };
 
   return (
-    <section className="py-20 bg-dark-primary">
+    <section id="chat" className="py-20 bg-dark-primary">
       <div className="container mx-auto px-6">
         <div 
           ref={titleRef}
