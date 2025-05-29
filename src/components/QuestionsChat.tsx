@@ -145,7 +145,7 @@ const QuestionsChat: React.FC<QuestionsChatProps> = ({ onChatSend }) => {
           <div className="bg-dark-secondary rounded-lg p-4 mb-4">
             <div 
               ref={chatContainerRef}
-              className="h-96 overflow-y-auto p-4 space-y-4"
+              className="h-[32rem] overflow-y-auto p-4 space-y-4"
             >
               {messages.length === 0 ? (
                 <div className="text-center text-gray-400 mt-20">
