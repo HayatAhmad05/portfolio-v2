@@ -68,8 +68,8 @@ const QuestionsChat: React.FC<QuestionsChatProps> = ({ onChatSend }) => {
   };
 
   return (
-    {/* Chat widget mount point */}
     <section className="py-20 bg-dark-primary">
+      {/* Chat widget mount point */}
       <div className="container mx-auto px-6">
         <div 
           ref={titleRef}
