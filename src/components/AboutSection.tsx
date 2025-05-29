@@ -46,7 +46,7 @@ const AboutSection = () => {
       ref={sectionRef}
       className="py-20 relative overflow-hidden"
     >
-      <div className="absolute inset-0 checkerboard-bg opacity-10"></div>
+      <div className="absolute inset-0 animated-bg opacity-10"></div>
       
       <div className="container mx-auto px-6 relative z-10">
         <div className="bg-dark-secondary rounded-3xl p-8 md:p-12 glass-morphism">

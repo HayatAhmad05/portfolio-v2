@@ -27,7 +27,7 @@ const HeroSection = () => {
 
   return (
     <section className="min-h-screen flex items-center justify-center relative overflow-hidden">
-      <div ref={parallaxRef} className="absolute inset-0 checkerboard-bg opacity-30"></div>
+      <div ref={parallaxRef} className="absolute inset-0 animated-bg opacity-50"></div>
       
       <div className="container mx-auto px-6 text-center relative z-10">
         <div className="animate-fade-in">
@@ -48,12 +48,6 @@ const HeroSection = () => {
           >
             Let's get in touch
           </Button>
-        </div>
-      </div>
-
-      <div className="absolute bottom-10 left-1/2 transform -translate-x-1/2 animate-bounce">
-        <div className="w-6 h-10 border-2 border-gray-400 rounded-full flex justify-center">
-          <div className="w-1 h-3 bg-gray-400 rounded-full mt-2 animate-pulse"></div>
         </div>
       </div>
     </section>

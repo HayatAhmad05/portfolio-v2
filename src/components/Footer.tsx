@@ -4,7 +4,7 @@ import React from 'react';
 const Footer = () => {
   return (
     <footer id="contact" className="py-12 relative overflow-hidden">
-      <div className="absolute inset-0 checkerboard-bg opacity-10"></div>
+      <div className="absolute inset-0 animated-bg opacity-10"></div>
       
       <div className="container mx-auto px-6 relative z-10">
         <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
