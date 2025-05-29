@@ -56,7 +56,11 @@ const QuestionsChat: React.FC<QuestionsChatProps> = ({ onChatSend }) => {
 
       try {
         console.log('Sending message to API:', message);
-        const response = await fetch('/api/chat', {
+        const apiUrl = import.meta.env.PROD 
+          ? '/api/chat'  // In production, use relative path
+          : 'http://localhost:3000/api/chat';  // In development, use local server
+        
+        const response = await fetch(apiUrl, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ message }),
