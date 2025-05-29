@@ -1,5 +1,6 @@
-
 import React from 'react';
+import { FaGithub, FaLinkedin } from "react-icons/fa";
+import { SiItchdotio } from "react-icons/si";
 
 const Footer = () => {
   return (
@@ -53,22 +54,25 @@ const Footer = () => {
               <h4 className="text-lg font-semibold text-white mb-4">Digital Spaces</h4>
               <div className="flex gap-4">
                 <a 
-                  href="#" 
+                  href="https://github.com/HayatAhmad05" 
+                  target="_blank" rel="noopener noreferrer"
                   className="w-12 h-12 bg-dark-accent border border-gray-600 rounded-lg flex items-center justify-center hover:border-cyan-accent hover:bg-cyan-accent/10 transition-all duration-200 group"
                 >
-                  <span className="text-xl group-hover:scale-110 transition-transform duration-200">🐙</span>
+                  <FaGithub className="text-2xl text-white group-hover:text-cyan-accent transition-colors duration-200" />
                 </a>
                 <a 
-                  href="#" 
+                  href="https://www.linkedin.com/in/hayatahm/" 
+                  target="_blank" rel="noopener noreferrer"
                   className="w-12 h-12 bg-dark-accent border border-gray-600 rounded-lg flex items-center justify-center hover:border-cyan-accent hover:bg-cyan-accent/10 transition-all duration-200 group"
                 >
-                  <span className="text-xl group-hover:scale-110 transition-transform duration-200">💼</span>
+                  <FaLinkedin className="text-2xl text-white group-hover:text-cyan-accent transition-colors duration-200" />
                 </a>
                 <a 
-                  href="#" 
+                  href="https://itch.io/dashboard" 
+                  target="_blank" rel="noopener noreferrer"
                   className="w-12 h-12 bg-dark-accent border border-gray-600 rounded-lg flex items-center justify-center hover:border-cyan-accent hover:bg-cyan-accent/10 transition-all duration-200 group"
                 >
-                  <span className="text-xl group-hover:scale-110 transition-transform duration-200">🎨</span>
+                  <SiItchdotio className="text-2xl text-white group-hover:text-cyan-accent transition-colors duration-200" />
                 </a>
               </div>
             </div>
